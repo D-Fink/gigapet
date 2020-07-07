@@ -36,3 +36,9 @@
     transform: rotate(360deg);
   }
 }
+
+.error {
+  font-family: 'Averia Sans Libre', cursive;
+  font-size: 0.75rem;
+  font-weight: bold;
+}
