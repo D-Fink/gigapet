@@ -1,55 +1,58 @@
 import React, {useState} from 'react';
 import axios from 'axios';
-import useForm from '../hooks/useForm';
-import validation from '../hooks/validation';
 
 const Register = props => {
 
-    const {handleChange, handleSubmit, values, errors} = useForm(submit, validation);
+    const [userCreate, setUserCreate] = useState({username: "", password: "", email: ""})
 
-    function submit(){
-        console.log(values)
+    const handleSubmit = e => {
+        e.preventDefault();
+        console.log(userCreate)
         axios
-        .post('https://dfink-gigapet.herokuapp.com/api/users/register', values)
+        .post('https://dfink-gigapet.herokuapp.com/api/users/register', userCreate)
         .then( res => {
             console.log(res)
-            props.history.push('/login')
+            props.history.push("/login")
         })
         .catch(error => {
             console.log(error)
         })
-   
     }
+
+    const handleChange= e => {
+        let value = e.target.value;
+        let name = e.target.name;
+        setUserCreate({
+            ...userCreate,
+            [name]: value,
+            [name]: value,
+            [name]: value
+        })
+    }
+
     return (
         <div>
-            <form onSubmit={submit}>
+            <form onSubmit={handleSubmit}>
                 <input type="text"
                 placeholder="username"
                 name="username"
-                value={values.username}
+                value={userCreate.username}
                 onChange={handleChange}
-                className={`${errors.username && "inputError"}`}
                 />
-
-                {errors.username && <p className="error">{errors.username}</p>}
 
                 <input type="password"
                 placeholder="password"
                 name="password"
-                value={values.password}
+                value={userCreate.password}
                 onChange={handleChange}
-                className={`${errors.password && "inputError"}`} />
-
-                {errors.password && <p className="error">{errors.password}</p>}
+                />
 
                 <input type="email"
                 placeholder="email"
                 name="email"
-                value={values.email}
+                value={userCreate.email}
                 onChange={handleChange}
-                className={`${errors.email && "inputError"}`} />
-
-                {errors.email && <p className="error">{errors.email}</p>}
+                />
 
                 <button type="submit">Sign Up</button>
             </form>

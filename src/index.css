@@ -11,3 +11,184 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+
+.home{
+  background-color: rgb(236, 120, 12);
+  height: 100%
+}
+
+#egg{
+  background: url('./img/egg.png') no-repeat;
+  width: 100px;
+  height: 150px;
+}
+
+#vivi1{
+  background: url('./img/vivi.png') no-repeat;
+  width: 100px;
+  height: 150px;
+}
+
+#vivi2{
+  background: url('./img/vivi_2.png') no-repeat;
+  width: 100px;
+  height: 150px;
+}
+
+#quina1{
+  background: url('./img/quina.png') no-repeat;
+  width: 100px;
+  height: 150px;
+}
+
+#quina2{
+  background: url('./img/quina_2.png') no-repeat;
+  width: 100px;
+  height: 150px;
+}
+
+#dead{
+  background: url('./img/tombstone.png') no-repeat;
+  width: 100px;
+  height: 150px;
+}
+
+.petCard{
+  background-color: lightgray;
+  border: solid 1px black;
+  border-radius: 10px;
+  margin: 50px auto;
+  height: 150px;
+  width: 50%;
+  box-shadow: 5px 10px purple;
+}
+
+.cardStats{
+  background-color: white;
+  border: solid 1px black;
+  border-radius: 10px;
+  box-shadow: inset 0px 0px 5px 5px rgba(0,0,0,0.2);
+  width: 60%;
+  height: 80%;
+  margin-right: 50px;
+  margin-top: 10px;
+}
+
+.flex{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.flexColumn{
+  display: flex;
+  flex-direction: column-reverse;
+}
+
+.centerText{
+  text-align: center;
+}
+
+.petLink{
+  text-decoration: none;
+  color: black
+}
+
+.petLink h3{
+  text-align: center;
+}
+
+.createPetBtn{
+  margin: auto 38%;
+  height: 5%;
+  width: 25%;
+}
+
+.Happy{
+  color: rgb(51, 190, 9);
+}
+
+.Sad{
+  color: blue;
+}
+
+.popup{
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  margin: auto;
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: 99;
+}
+
+.popupInner{
+  position: absolute;
+  left: 25%;
+  right: 25%;
+  top: 40%;
+  bottom: 40%;
+  margin: auto;
+  background-color: rgba(255, 255, 255);
+  border: 5px solid black;
+}
+
+.popupText{
+  padding-top: 2%;
+  padding-left: 20%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  width: 50%;
+}
+
+.popupText button{
+  width: 25%;
+  margin: 0 auto;
+}
+
+.petMain{
+  width: 100%;
+  text-align: center;
+  padding-bottom: 10%;
+}
+
+.petMainImg{
+  margin: 0 auto;
+  width: 40%;
+  border: solid 3px black;
+  border-radius: 40px;
+  background-color: indigo;
+}
+
+.foodCard{
+  width: 50%;
+  margin: 0 auto;
+}
+
+.foodData{
+  width: 354px;
+  margin: 0 auto;
+}
+
+.foodList{
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  width: 30%;
+}
+
+.invisible{
+  visibility: hidden;
+}
+
+.foodList img{
+  width: 30%;
+  margin: 0 auto;
+  border: solid 3px black;
+  border-radius: 10px;
+  background-color: lightgrey;
+}

@@ -1,72 +1,82 @@
 import React, {useState, useEffect} from "react";
 import { connect } from "react-redux";
-import {petData, createPet} from "../actions/index";
-import { axiosWithAuth } from "../utils/axiosWithAuth";
+import {petsData } from "../actions/index";
+import { Link } from 'react-router-dom';
+import ProgressBar from '../components/ProgressBar';
+import CreatePet from '../components/CreatePet';
 
 const Home = props => {
 
+    const [displayPop, setDisplayPop] = useState(false)
+
     useEffect(() => {
-        props.petData()
+        props.petsData()
     }, [])
 
-    function getRandom() {
-        return Math.floor(Math.random()*3) + 1
+    const imgSelect = (stage, type) =>{
+        if(stage === 0){
+            return "egg"
+        } else if(stage === 1 && type === 1){
+            return "vivi1"
+        } else if(stage === 2 && type === 1){
+            return "vivi2"
+        } else if(stage === 1 && type === 2){
+            return "quina1"
+        } else if (stage === 2 && type == 2){
+            return "quina2"
+        } else {
+            return "dead"
+        }
     }
 
-    const initialPet = {
-        name: "", 
-        progress: null, 
-        stage: null, 
-        status: null, 
-        type: null
+    const status = (status) => {
+        if(status === 0){
+            return "Sad"
+        } else if(status === 1){
+            return "Happy"
+        } else {
+            return "Dead"
+        }
     }
 
-    const [petData, setPetData] = useState(initialPet);
-
-    const handleChange = e =>{
-        let value = e.target.value;
-        setPetData({
-            ...petData,
-            name: value,
-            progress: 0, 
-            stage: 0, 
-            status: 1, 
-            type: getRandom()
-        })
-    }
-
-    const handleSubmit = e => {
-        e.preventDefault();
-        props.createPet(petData)
+    const petsLength = () => {
+        return props.pets.length
     }
 
 
     return (
-        <div>
+        <div className='home'>
             <div>
-                <h1>Pets</h1>
-                {props.pets.map(pet => <p>{pet.name}</p>)}
+                <h1 className='centerText'>Pets</h1>
+                {props.isFetching && (<p>Loading Pets...</p>)}
+                {props.pets.map(pet => 
+                <div className='petCard' key={pet.id}>
+                    <Link className='flex petLink' to={`/pet/${pet.id}`}>
+                        <div id={imgSelect(pet.stage, pet.type)}>
+                        </div>
+                        <div className='cardStats'>
+                            <h3 className='centerText'>{pet.name}</h3>
+                            <p className='centerText'>Status: <span className={status(pet.status)}>{status(pet.status)}</span></p>
+                                <ProgressBar completed={pet.progress} />
+                        </div>
+                    </Link>
+                </div>
+                )}
             </div>
-            
-            <form onSubmit={handleSubmit}>
-                <label htmlFor="name">Pet Name:</label>
-                <input
-                id="name"
-                name="name"
-                type="text"
-                value={petData.name}
-                onChange={handleChange} />
-                <button type='submit'>Create Pet</button>
-            </form>
+            <button onClick={() => {setDisplayPop(true)}} className='createPetBtn'>Create A Pet</button>
+            {displayPop ? (
+                <CreatePet toggleDisplay={setDisplayPop} pet={props.pets[props.pets.length - 1]}/>
+            ) : null}
         </div>
     )
 }
 
 const mapStateToProps = state => {
-    console.log(state.pets)
+
     return {
-        pets: state.pets
+        pets: state.pets,
+        isFetching: state.isFetching
     }
 }
 
-export default connect(mapStateToProps, {petData, createPet})(Home)
+export default connect(mapStateToProps, {petsData})(Home)

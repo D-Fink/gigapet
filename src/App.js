@@ -23,7 +23,9 @@ function App() {
     <Route path="/login" component={Login} />
     <Route path="/register" component={Register} />
     <PrivateRoute path="/home" component={Home} />
-    <PrivateRoute path="/pet/:id" component={PetCard} />
+    <Route path="/pet/:id" render={props => {
+      return <PetCard {...props} />
+    }} />
     </div>
   );
 }
